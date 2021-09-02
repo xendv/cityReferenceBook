@@ -13,10 +13,4 @@ public class CityComparator {
             return city1.getDistrict().compareTo(city2.getDistrict());
         }
     }
-    public static class cityDistrictAndNameDescendingAlphabetComparator implements Comparator<City> {
-        @Override
-        public int compare(City city1, City city2){
-            return city1.getDistrict().compareTo(city2.getDistrict());
-        }
-    }
 }
