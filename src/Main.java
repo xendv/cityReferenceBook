@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -7,7 +5,6 @@ public class Main {
         System.setProperty("file.encoding", "UTF-8");
         List<City> cities = CityUtils.parseCities();
 
-        ArrayList<Integer> cityPopulationArray = CityUtils.makeArrayOfPopulation(cities);
-        System.out.println(CityUtils.maxPopulation(cityPopulationArray));
+        CityUtils.printNumOfCitiesInRegions(cities);
     }
 }

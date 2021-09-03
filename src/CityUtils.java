@@ -115,4 +115,31 @@ public class CityUtils {
         }
         return "[" + idMaxPopulation + "] = " + getFormattedPopulation(maxPopulation);
     }
+
+    /**
+     * Функция составления HashMap по принципу: регион - количество городов
+     * @param cities
+     * @return HashMap<String, Integer> numOfCitiesMap
+     */
+    public static HashMap<String, Integer> getNumOfCitiesInRegions(List<City> cities){
+        HashMap<String, Integer> numOfCitiesMap = new HashMap<>();
+        for (City city: cities){
+            String tempKey = city.getRegion();
+            if (!numOfCitiesMap.containsKey(city.getRegion())){
+                numOfCitiesMap.put(city.getRegion(), 1);
+            }
+            else numOfCitiesMap.replace(tempKey, numOfCitiesMap.get(tempKey) + 1);
+        }
+        return numOfCitiesMap;
+    }
+
+    /**
+     * Функция печати количества городов в разрезе регионов
+     * @param cities
+     */
+    public static void printNumOfCitiesInRegions(List<City> cities){
+        for (Map.Entry<String, Integer> entry : getNumOfCitiesInRegions(cities).entrySet()){
+            System.out.println(entry.getKey() + " - " + entry.getValue());
+        }
+    }
 }
