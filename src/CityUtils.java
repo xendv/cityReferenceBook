@@ -1,8 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class CityUtils {
     /**
@@ -68,5 +66,53 @@ public class CityUtils {
         for (City city : cities){
             System.out.println(city.toString());
         }
+    }
+
+    /**
+     * Функция сортировки городов по имени в убывающем порядке
+     * при помощи компаратора
+     * @param cities
+     */
+    public static void sortCitiesByNameWithComparator(List<City> cities){
+        cities.sort(new CityComparator.cityNameDescendingAlphabetComparator());
+    }
+
+    /**
+     * Функция сортировки городов по ФО и имени в убывающем порядке
+     * при помощи компаратора
+     * @param cities
+     */
+    public static void sortCitiesByDistrictAndNameWithComparator(List<City> cities){
+        cities.sort(new CityComparator.cityDistrictDescendingAlphabetComparator()
+                .thenComparing(new CityComparator.cityNameDescendingAlphabetComparator()));
+    }
+
+    public static ArrayList<Integer> makeArrayOfPopulation(List<City> cities){
+        ArrayList<Integer> cityPopulationArray = new ArrayList<>();
+        for (City city: cities){
+            cityPopulationArray.add(city.getPopulation());
+        }
+        return cityPopulationArray;
+    }
+
+    public static String getFormattedPopulation(Integer population){
+        Integer tempInt = population;
+        String formattedPopulation = "";
+        while (population % 1000 != 0){
+            formattedPopulation = population % 1000 + " " + formattedPopulation;
+            population /= 1000;
+        }
+        return formattedPopulation;
+    }
+
+    public static String maxPopulation(ArrayList<Integer> cityPopulationArray) {
+        int idMaxPopulation = -1; int maxPopulation = 0;
+        for (Integer population: cityPopulationArray){
+            if (population > maxPopulation){
+                idMaxPopulation = cityPopulationArray.indexOf(population);
+                maxPopulation = population;
+            }
+        }
+        return "[" + idMaxPopulation + "] = " + getFormattedPopulation(maxPopulation);
     }
 }
